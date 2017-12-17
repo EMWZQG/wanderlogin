@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/EMWZQG/scatterlogin/issues"
   },
-  "homepage": "https://github.com/EMWZQG/scatterlogin#readme"
+  "homepage": "https://github.com/EMWZQG/scatterlogin#readme",
+  "dependencies": {
+    "koa": "^2.4.1",
+    "koa-router": "^7.3.0",
+    "winston": "^2.4.0"
+  }
 }
