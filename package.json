@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/EMWZQG/scatterlogin#readme",
   "dependencies": {
+    "aws-sdk": "^2.171.0",
     "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.3.0",
     "winston": "^2.4.0"
   }

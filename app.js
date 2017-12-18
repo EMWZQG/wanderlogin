@@ -10,6 +10,8 @@ const winston = require('winston');
 
 const utils = require('./utils');
 
+global.projroot = __dirname;
+
 winston.level = process.env.SCATTERLOGIN_LOG_LEVEL || 'info';
 
 async function main() {

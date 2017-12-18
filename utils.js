@@ -24,5 +24,12 @@ module.exports = {
         });
         
         return apiRouter;
+    },
+    assertEnvVar: name => {
+        if (!process.env[name]) {
+            throw new Error(`Environmental variable ${name} must be set.`);
+        }
+        
+        return process.env[name];
     }
 };
