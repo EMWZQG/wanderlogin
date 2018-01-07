@@ -1,7 +1,10 @@
 const Router = require('koa-router');
 const winston = require('winston');
+var crypto = require('crypto');
+var base64url = require('base64url');
 
 module.exports = {
+    generateUrlSafeToken: byteCount => base64url(crypto.randomBytes(byteCount)),
     buildApiRouter: async () => {
         const apiRouter = new Router();
         
@@ -31,5 +34,25 @@ module.exports = {
         }
         
         return process.env[name];
+    },
+    errorHandler: exposedSet => async (ctx, next) => {
+        try {
+            await next();
+        }
+        catch (e) {
+            if (exposedSet.has(e.code)) {
+                ctx.status = 400;
+                ctx.body = e.message;
+            }
+            else {
+                ctx.status = 500;
+                ctx.body = 'Internal server error.';
+            }
+            
+            while (e) {
+                console.log(e);
+                e = e.cause;
+            }
+        }
     }
 };

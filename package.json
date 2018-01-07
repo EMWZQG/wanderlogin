@@ -4,7 +4,8 @@
   "description": "Opinionated user and session management microapp.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "export MAIL_ROOT_DOMAIN=wanderlogin.com; export BASE_URL=https://wanderlogin.com; node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,19 @@
   },
   "homepage": "https://github.com/EMWZQG/scatterlogin#readme",
   "dependencies": {
-    "aws-sdk": "^2.171.0",
+    "@emwzqg/di": ">0.0.0",
+    "@emwzqg/validate": ">0.0.0",
+    "aws-sdk": "^2.173.0",
+    "base64url": "^2.0.0",
+    "co-body": "^5.1.1",
+    "command-line-args": "^4.0.7",
+    "dedent": "^0.7.0",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.3.0",
+    "merge": "^1.2.0",
+    "moment": "^2.20.1",
+    "mustache": "^2.3.0",
     "winston": "^2.4.0"
   }
 }
