@@ -35,13 +35,19 @@ module.exports = {
         
         return process.env[name];
     },
+    jsonFormatter: async (ctx, next) => {
+        await next();
+        if (ctx.body !== undefined) {
+            ctx.body = JSON.stringify(ctx.body);
+        }
+    },
     errorHandler: exposedSet => async (ctx, next) => {
         try {
             await next();
         }
         catch (e) {
             if (exposedSet.has(e.code)) {
-                ctx.status = 400;
+                ctx.status = e.status || 400;
                 ctx.body = e.message;
             }
             else {

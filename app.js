@@ -43,6 +43,7 @@ async function main() {
     
     winston.debug('Building api router...');
     api.use('/api/v1', 
+            utils.jsonFormatter,
             utils.errorHandler(exposedSet()),
             (await utils.buildApiRouter()).routes());
     

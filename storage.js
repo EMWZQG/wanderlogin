@@ -20,6 +20,21 @@ module.exports = async driver => {
             
             return token;
         },
+        generateSessionToken: async (application, accountId) => {
+            const token = utils.generateUrlSafeToken(20);
+            
+            const appConfig = await driver.getApplicationConfig(application);
+            const ttl = moment.duration(
+                    ...(appConfig.sessionTimeToLive || [24, 'hours']));
+            
+            await driver.saveToken(token, ttl, {
+                application: application,
+                accountId: accountId
+            });
+            
+            return token;
+        },
+        consumeToken: async token => await driver.consumeToken(token),
         checkEmailMayRegister: async (application, email) => {
             if (application !== '' || !matchesAtLeastOne(
                     email, temporaryRootApplicationWhitelist)) {
@@ -41,6 +56,12 @@ module.exports = async driver => {
         },
         getAccountContext: (application, email) =>
                 driver.getAccountContextByEmail(application, email),
+        createAccount: async application => {
+            const accountId = utils.generateUrlSafeToken(10);
+            const account = await driver.createAccount(application, accountId);
+            
+            return account;
+        },
         addRootApplicationTemporaryWhitelistPattern: pattern => {
             // Just building this so that invalid regular expressions will error
             // early.
